@@ -13,7 +13,7 @@ provider "azurerm" {
 
 # Identiti Unik V5
 resource "azurerm_resource_group" "morphos_rg" {
-  name     = "RG-MORPHOS-V5-SOVEREIGN"
+  name     = "RG-MORPHOS-V6-SOVEREIGN"
   location = "West US 2" 
 }
 
