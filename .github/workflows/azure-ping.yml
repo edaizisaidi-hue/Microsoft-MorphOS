@@ -1,16 +1,24 @@
 name: "MORPHOS-Azure-Handshake"
 
 on:
-  workflow_dispatch: # Membolehkan trigger manual dari web
+  workflow_dispatch:
 
 jobs:
-  ping:
+  ping-test:
     runs-on: ubuntu-latest
     steps:
       - name: Azure Login
-        uses: azure/login@v2
+        uses: azure/login@v1
         with:
-          creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
+          creds: |
+            {
+              "clientId": "${{ secrets.AZURE_CLIENT_ID }}",
+              "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}",
+              "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}",
+              "tenantId": "${{ secrets.AZURE_TENANT_ID }}"
+            }
 
-      - name: Verify Access
-        run: az account show --output table
+      - name: Diagnostic: Check Connection
+        run: |
+          echo "Handshake Verified. System Online."
+          az account show --query "{Subscription:name, Tenant:tenantId, Status:state}" --output table
