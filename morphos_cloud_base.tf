@@ -4,7 +4,7 @@
 
 resource "azurerm_resource_group" "morphos_rg" {
   name     = "RG-MORPHOS-SOVEREIGN"
-  location = "East US"
+  location = "North Europe"
 }
 
 resource "azurerm_virtual_network" "morphos_vnet" {
