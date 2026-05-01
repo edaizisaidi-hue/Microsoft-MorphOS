@@ -11,9 +11,10 @@ provider "azurerm" {
   features {}
 }
 
+# Identiti Unik V5
 resource "azurerm_resource_group" "morphos_rg" {
-  name     = "RG-MORPHOS-SOVEREIGN"
-  location = "North Europe" # Lokasi lebih stabil untuk kuota
+  name     = "RG-MORPHOS-V5-SOVEREIGN"
+  location = "West US 2" 
 }
 
 resource "azurerm_virtual_network" "morphos_vnet" {
