@@ -56,7 +56,7 @@ resource "azurerm_linux_virtual_machine" "morphos_conf_vm" {
   name                = "VM-MORPHOS-DNA-SYNTH"
   resource_group_name = azurerm_resource_group.morphos_rg.name
   location            = azurerm_resource_group.morphos_rg.location
-  size                = "Standard_DC2s_v3"
+  size                = "Standard_B2s"
   admin_username      = "tsa_architect"
 
   network_interface_ids = [azurerm_network_interface.conf_nic.id]
