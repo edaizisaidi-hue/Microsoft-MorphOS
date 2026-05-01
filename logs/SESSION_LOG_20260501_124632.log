@@ -1,0 +1,41 @@
+Script started on 2026-05-01 12:46:32+08:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="97" LINES="62"]
+[?2004h[0;32m~/MorphOS_Clean[0m [0;97m$[0m [K[0;32m~/MorphOS_Clean[0m [0;97m$[0m [K[0;32m~/MorphOS_Clean[0m [0;97m$[0m [7mcat << 'EOF' >> ~/.bashrc[27m
+
+[7momega_collect_logs() {[27m
+[7m    LEDGER="$HOME/MorphOS_Clean/INTELLIGENCE_LEDGER_LOGS.md"[27m
+[7m    echo "# OMEGA INTELLIGENCE LEDGER - $(date)" > "$LEDGER"[27m
+[7m    echo "## Forensic Activity Logs" >> "$LEDGER"[27m
+[7m    [27m
+[7m    for file in $HOME/MorphOS_Clean/logs/*.log; do[27m
+[7m        echo "### LOG: $(basename $file)" >> "$LEDGER"[27m
+[7m        echo '```text' >> "$LEDGER"[27m
+[7m        cat "$file" >> "$LEDGER"[27m
+[7m        echo -e '\n```\n' >> "$LEDGER"[27m
+[7m    done[27m
+[7m    echo "[SUCCESS] Semua log dihimpunkan ke $LEDGER"[27m
+[7m}[27m
+[7mEOF[27m
+[7msource ~/.bashrc[27m
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccat << 'EOF' >> ~/.bashrc
+
+omega_collect_logs() {
+    LEDGER="$HOME/MorphOS_Clean/INTELLIGENCE_LEDGER_LOGS.md"
+    echo "# OMEGA INTELLIGENCE LEDGER - $(date)" > "$LEDGER"
+    echo "## Forensic Activity Logs" >> "$LEDGER"
+    
+    for file in $HOME/MorphOS_Clean/logs/*.log; do
+        echo "### LOG: $(basename $file)" >> "$LEDGER"
+        echo '```text' >> "$LEDGER"
+        cat "$file" >> "$LEDGER"
+        echo -e '\n```\n' >> "$LEDGER"
+    done
+    echo "[SUCCESS] Semua log dihimpunkan ke $LEDGER"
+}
+EOF
+source ~/.bashrc
+[A
+[?2004l[?2004h[0;32m~/MorphOS_Clean[0m [0;97m$[0m [K[0;32m~/MorphOS_Clean[0m [0;97m$[0m [K[0;32m~/MorphOS_Clean[0m [0;97m$[0m [7momega_record[27momega_record
+[?2004l[1;32m[OMEGA] Memulakan rakaman aktiviti...[0m
+[1;34m[INFO] Fail log: /data/data/com.termux/files/home/MorphOS_Clean/logs/SESSION_LOG_20260501_124712.log[0m
+[1;33m[NOTE] Taip 'exit' untuk menamatkan rakaman.[0m
+[?2004h[0;32m~/MorphOS_Clean[0m [0;97m$[0m [K[0;32m~/MorphOS_Clean[0m [0;97m$[0m [K[0;32m~/MorphOS_Clean[0m [0;97m$[0m 
