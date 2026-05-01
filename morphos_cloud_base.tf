@@ -30,7 +30,6 @@ resource "azurerm_subnet" "morphos_subnet" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-# VM Tunggal (Tanpa Gateway buat sementara untuk kelajuan deployment)
 resource "azurerm_public_ip" "morphos_pip" {
   name                = "PIP-MORPHOS"
   location            = azurerm_resource_group.morphos_rg.location
@@ -69,6 +68,11 @@ resource "azurerm_network_interface" "morphos_nic" {
   }
 }
 
+resource "azurerm_network_interface_security_group_association" "nsg_assoc" {
+  network_interface_id      = azurerm_network_interface.morphos_nic.id
+  network_security_group_id = azurerm_network_security_group.morphos_nsg.id
+}
+
 resource "azurerm_linux_virtual_machine" "morphos_vm" {
   name                = "VM-MORPHOS-CORE"
   resource_group_name = azurerm_resource_group.morphos_rg.name
@@ -76,16 +80,19 @@ resource "azurerm_linux_virtual_machine" "morphos_vm" {
   size                = "Standard_B2s"
   admin_username      = "tsa_architect"
   network_interface_ids = [azurerm_network_interface.morphos_nic.id]
+  
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
+
   source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-focal"
     sku       = "20_04-lts"
     version   = "latest"
   }
+
   admin_ssh_key {
     username   = "tsa_architect"
     public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDNIQ1DpXw9TC5hJ4N55VaqViyY1MM2q7R5YzpwjS8z/zAFrPuO3rOtHF5TWxI+yuqglpnN+i6nBhdYsMpJIKvtt+eEJQue9yawHNkUT8sK6iGZF9VGx/R3fEesCNF607VbTNMU5qa4/WsNvqnIFcHkpTrUlaCc7SkBg6/IReFuv+dGqu2KiHCEeGYNUtXuQG02bNpwMO1lAFPUfI51m3DoKy1uJYPWBUK7p4yah5Mc/QxtUbgZWljuwMILDO9MjGgL7DFesWM3/XIySh2JpFNJDLtk/zMCGDQn3yHdoG6IpBjiFMxxNSWmGwgXznuYGk29DFiwvkMaqeG26VxpSiDRbhk/Hr/VpaufSx4R07f12Y4AAevRSSanxni4e9EVjy6XG/9uTWqISsrBt3Gw19BwKENZYl/XMxVHU4zY5y6F/MQKnHDiBxAplo1JqOrKx1cTRj/PnT+nh74A3/35tprWTQGcGr602fBLEmzzg7hc9BJNRHlOLA1kSeXUZeVcNcwDHzWLKCUy+UhKZKdgZwKOB+YeaH+dOwa7iGyLNJVIuQdL3fi3cHICPxfBYJSAbLIsTBwxlGg836cuGKHRGn3jHw5ljA3ZLAAWnZjJkVop7HEdXTJTXuKKyHSO0DXAjHEsDY/nu0MOgZM6rrzM1Kp3fm98m7Irh+4Yk1TMM8I4hw== edaizisaidi-hue"
